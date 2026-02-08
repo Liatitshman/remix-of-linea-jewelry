@@ -1,4 +1,4 @@
-import heroImage from "@/assets/hero-image.png";
+import heroImage from "@/assets/hero-diamonds.jpg";
 
 const LargeHero = () => {
   return (
@@ -6,16 +6,16 @@ const LargeHero = () => {
       <div className="w-full aspect-[16/9] mb-3 overflow-hidden">
         <img 
           src={heroImage} 
-          alt="Modern jewelry collection" 
+          alt="Loose brilliant cut diamonds collection" 
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="">
+      <div>
         <h2 className="text-sm font-normal text-foreground mb-1">
-          Modern Heritage
+          Exceptional Brilliance
         </h2>
-        <p className="text-sm font-light text-foreground">
-          Contemporary jewelry crafted with timeless elegance
+        <p className="text-sm font-light text-muted-foreground">
+          GIA-certified diamonds sourced directly from the Israel Diamond Exchange
         </p>
       </div>
     </section>

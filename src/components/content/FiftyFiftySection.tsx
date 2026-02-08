@@ -1,5 +1,5 @@
-import earringsCollection from "@/assets/earrings-collection.png";
-import linkBracelet from "@/assets/link-bracelet.png";
+import diamondRing from "@/assets/diamond-ring-1.jpg";
+import diamondBracelet from "@/assets/diamond-bracelet-1.jpg";
 import { Link } from "react-router-dom";
 
 const FiftyFiftySection = () => {
@@ -7,21 +7,21 @@ const FiftyFiftySection = () => {
     <section className="w-full mb-16 px-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <Link to="/category/earrings" className="block">
+          <Link to="/category/rings" className="block">
             <div className="w-full aspect-square mb-3 overflow-hidden">
               <img 
-                src={earringsCollection} 
-                alt="Earrings collection" 
+                src={diamondRing} 
+                alt="Diamond rings collection" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
           </Link>
-          <div className="">
+          <div>
             <h3 className="text-sm font-normal text-foreground mb-1">
-              Organic Forms
+              Diamond Rings
             </h3>
-            <p className="text-sm font-light text-foreground">
-              Nature-inspired pieces with fluid, sculptural details
+            <p className="text-sm font-light text-muted-foreground">
+              Engagement, wedding & statement rings in 14K–22K gold
             </p>
           </div>
         </div>
@@ -30,18 +30,18 @@ const FiftyFiftySection = () => {
           <Link to="/category/bracelets" className="block">
             <div className="w-full aspect-square mb-3 overflow-hidden">
               <img 
-                src={linkBracelet} 
-                alt="Chain link bracelet" 
+                src={diamondBracelet} 
+                alt="Diamond tennis bracelet" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
           </Link>
-          <div className="">
+          <div>
             <h3 className="text-sm font-normal text-foreground mb-1">
-              Chain Collection
+              Tennis Bracelets
             </h3>
-            <p className="text-sm font-light text-foreground">
-              Refined links and connections in precious metals
+            <p className="text-sm font-light text-muted-foreground">
+              Classic brilliance in white gold & platinum settings
             </p>
           </div>
         </div>
