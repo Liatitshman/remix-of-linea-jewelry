@@ -36,7 +36,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         <div className="flex justify-between items-start">
           <div>
             <p className="text-sm font-light text-muted-foreground mb-1">{categoryLabel}</p>
-            <h1 className="text-2xl md:text-3xl font-light text-foreground">{product.name}</h1>
+            <h1 className="text-2xl md:text-3xl text-foreground" style={{ fontFamily: 'var(--font-display)', fontWeight: 300 }}>{product.name}</h1>
           </div>
           <div className="text-right">
             <p className="text-xl font-light text-foreground">{product.price}</p>
@@ -53,9 +53,9 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           </div>
         )}
         
-        {product.diamond && (
+      {product.diamond && (
           <div className="space-y-2">
-            <h3 className="text-sm font-light text-foreground">Diamond Details</h3>
+            <h3 className="text-sm text-foreground" style={{ fontFamily: 'var(--font-display)' }}>Diamond Details</h3>
             <div className="grid grid-cols-2 gap-2 text-sm font-light text-muted-foreground">
               <span>Carat: {product.diamond.carat}</span>
               <span>Color: {product.diamond.color}</span>
@@ -63,6 +63,8 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
               <span>Cut: {product.diamond.cut}</span>
               {product.diamond.shape && <span>Shape: {product.diamond.shape}</span>}
               {product.diamond.fluorescence && <span>Fluorescence: {product.diamond.fluorescence}</span>}
+              {product.diamondCount && <span>Stones: {product.diamondCount}</span>}
+              {product.finish && <span>Finish: {product.finish}</span>}
             </div>
           </div>
         )}

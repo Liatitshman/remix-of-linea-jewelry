@@ -6,11 +6,8 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from "@/components/ui/select";
 import { allProducts, productVideos, type Product, type ProductVideo } from "@/data/products";
-import { Search, Filter, Download } from "lucide-react";
+import { Search, Download } from "lucide-react";
 
 type TabType = "all" | "loose-stones" | "rings" | "earrings" | "necklaces" | "bracelets" | "showcase" | "videos";
 
@@ -25,30 +22,24 @@ const categoryLabels: Record<string, string> = {
   "videos": "Videos",
 };
 
-const isPlaceholder = (val?: string) => !val || val.includes("[") || val.includes("החלף");
+const isPlaceholder = (val?: string | number) => {
+  if (val === undefined || val === null) return true;
+  if (typeof val === "number") return false;
+  return val.includes("[") || val.includes("Set ");
+};
 
-const PlaceholderCell = ({ value, label }: { value?: string; label: string }) => {
-  if (!value || isPlaceholder(value)) {
-    return (
-      <span className="text-destructive/60 italic text-xs">
-        ⚠ {label}
-      </span>
-    );
+const PlaceholderCell = ({ value, label }: { value?: string | number; label: string }) => {
+  if (value === undefined || value === null || isPlaceholder(value)) {
+    return <span className="text-destructive/60 italic text-xs">⚠ {label}</span>;
   }
   return <span className="text-foreground text-xs">{value}</span>;
 };
 
 const StatusBadge = ({ product }: { product: Product }) => {
   const fields = [
-    product.price,
-    product.material,
-    product.diamond?.carat,
-    product.diamond?.color,
-    product.diamond?.clarity,
-    product.diamond?.cut,
-    product.gia?.reportNumber,
-    product.weight,
-    product.dimensions,
+    product.price, product.material,
+    product.diamond?.carat, product.diamond?.color, product.diamond?.clarity, product.diamond?.cut,
+    product.gia?.reportNumber, product.weight, product.dimensions,
   ];
   const total = fields.length;
   const filled = fields.filter((f) => f && !isPlaceholder(f)).length;
@@ -73,7 +64,7 @@ const Inventory = () => {
     if (search) {
       const q = search.toLowerCase();
       items = items.filter(
-        (p) => p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q) || p.category.includes(q)
+        (p) => p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q) || p.category.includes(q) || (p.barcode && p.barcode.toLowerCase().includes(q))
       );
     }
     return items;
@@ -88,13 +79,13 @@ const Inventory = () => {
   }, [activeTab, search]);
 
   const exportCSV = () => {
-    const headers = ["ID","Name","Category","Type","Price","Material","Carat","Color","Clarity","Cut","Shape","Fluorescence","GIA Report","Weight","Dimensions","Image File"];
+    const headers = ["ID","Barcode","Name","Category","Type","Price","Material","Carat","Color","Clarity","Cut","Shape","Fluorescence","# Diamonds","Finish","GIA Report","Weight","Dimensions","Image"];
     const rows = allProducts.map((p) => [
-      p.id, p.name, p.category, p.type, p.price,
+      p.id, p.barcode || "", p.name, p.category, p.type, p.price,
       p.material || "", p.diamond?.carat || "", p.diamond?.color || "",
       p.diamond?.clarity || "", p.diamond?.cut || "", p.diamond?.shape || "",
-      p.diamond?.fluorescence || "", p.gia?.reportNumber || "",
-      p.weight || "", p.dimensions || "", p.id,
+      p.diamond?.fluorescence || "", p.diamondCount ?? "", p.finish || "",
+      p.gia?.reportNumber || "", p.weight || "", p.dimensions || "", p.id,
     ]);
     const csv = [headers, ...rows].map((r) => r.map((c) => `"${c}"`).join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
@@ -110,8 +101,8 @@ const Inventory = () => {
       <main className="pt-6 pb-16 px-4 md:px-8">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <h1 className="text-2xl font-light text-foreground">Inventory Management</h1>
-            <p className="text-sm text-muted-foreground mt-1">
+            <h1 className="text-2xl text-foreground" style={{ fontFamily: 'var(--font-display)' }}>Inventory Management</h1>
+            <p className="text-sm text-muted-foreground mt-1" style={{ fontFamily: 'var(--font-body)' }}>
               {allProducts.length} products · {productVideos.length} videos · Fields marked <span className="text-destructive">⚠</span> need data
             </p>
           </div>
@@ -141,7 +132,7 @@ const Inventory = () => {
         <div className="relative max-w-sm mb-6">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search by name, ID, or category..."
+            placeholder="Search by name, ID, barcode, or category..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-10 rounded-none text-sm"
@@ -155,21 +146,20 @@ const Inventory = () => {
               <TableHeader>
                 <TableRow className="bg-muted/30">
                   <TableHead className="w-16 text-xs">Image</TableHead>
-                  <TableHead className="text-xs">ID</TableHead>
+                  <TableHead className="text-xs">Barcode</TableHead>
                   <TableHead className="text-xs">Name</TableHead>
                   <TableHead className="text-xs">Category</TableHead>
-                  <TableHead className="text-xs">Type</TableHead>
-                  <TableHead className="text-xs">Price (₪)</TableHead>
+                  <TableHead className="text-xs">Price</TableHead>
                   <TableHead className="text-xs">Material</TableHead>
                   <TableHead className="text-xs">Carat</TableHead>
+                  <TableHead className="text-xs"># Dia.</TableHead>
+                  <TableHead className="text-xs">Shape</TableHead>
                   <TableHead className="text-xs">Color</TableHead>
                   <TableHead className="text-xs">Clarity</TableHead>
                   <TableHead className="text-xs">Cut</TableHead>
-                  <TableHead className="text-xs">Shape</TableHead>
-                  <TableHead className="text-xs">Fluorescence</TableHead>
-                  <TableHead className="text-xs">GIA Report #</TableHead>
+                  <TableHead className="text-xs">Finish</TableHead>
+                  <TableHead className="text-xs">GIA #</TableHead>
                   <TableHead className="text-xs">Weight</TableHead>
-                  <TableHead className="text-xs">Dimensions</TableHead>
                   <TableHead className="text-xs">Status</TableHead>
                 </TableRow>
               </TableHeader>
@@ -179,27 +169,26 @@ const Inventory = () => {
                     <TableCell className="p-2">
                       <img src={product.image} alt={product.name} className="w-12 h-12 object-cover" />
                     </TableCell>
-                    <TableCell className="text-xs font-mono text-muted-foreground">{product.id}</TableCell>
+                    <TableCell className="text-xs font-mono text-muted-foreground">{product.barcode || product.id}</TableCell>
                     <TableCell className="text-xs font-medium text-foreground min-w-[140px]">{product.name}</TableCell>
                     <TableCell className="text-xs capitalize">{product.category.replace("-", " ")}</TableCell>
-                    <TableCell className="text-xs capitalize">{product.type}</TableCell>
                     <TableCell><PlaceholderCell value={product.price} label="Set price" /></TableCell>
                     <TableCell><PlaceholderCell value={product.material} label="Set material" /></TableCell>
                     <TableCell><PlaceholderCell value={product.diamond?.carat} label="Set carat" /></TableCell>
-                    <TableCell><PlaceholderCell value={product.diamond?.color} label="Set color" /></TableCell>
-                    <TableCell><PlaceholderCell value={product.diamond?.clarity} label="Set clarity" /></TableCell>
-                    <TableCell><PlaceholderCell value={product.diamond?.cut} label="Set cut" /></TableCell>
+                    <TableCell><PlaceholderCell value={product.diamondCount} label="#" /></TableCell>
                     <TableCell><PlaceholderCell value={product.diamond?.shape} label="Set shape" /></TableCell>
-                    <TableCell><PlaceholderCell value={product.diamond?.fluorescence} label="Set fluor." /></TableCell>
+                    <TableCell><PlaceholderCell value={product.diamond?.color} label="Set" /></TableCell>
+                    <TableCell><PlaceholderCell value={product.diamond?.clarity} label="Set" /></TableCell>
+                    <TableCell><PlaceholderCell value={product.diamond?.cut} label="Set" /></TableCell>
+                    <TableCell><PlaceholderCell value={product.finish} label="Set finish" /></TableCell>
                     <TableCell><PlaceholderCell value={product.gia?.reportNumber} label="Set GIA #" /></TableCell>
                     <TableCell><PlaceholderCell value={product.weight} label="Set weight" /></TableCell>
-                    <TableCell><PlaceholderCell value={product.dimensions} label="Set dims" /></TableCell>
                     <TableCell><StatusBadge product={product} /></TableCell>
                   </TableRow>
                 ))}
                 {filteredProducts.length === 0 && (
                   <TableRow>
-                    <TableCell colSpan={17} className="text-center text-muted-foreground py-8">
+                    <TableCell colSpan={16} className="text-center text-muted-foreground py-8">
                       No products found
                     </TableCell>
                   </TableRow>
@@ -232,15 +221,8 @@ const Inventory = () => {
                     <TableCell className="text-xs font-mono text-muted-foreground">{video.id}</TableCell>
                     <TableCell className="text-xs font-medium">{video.title}</TableCell>
                     <TableCell className="text-xs font-mono text-muted-foreground">{video.url}</TableCell>
-                    <TableCell>
-                      <PlaceholderCell
-                        value={video.relatedProductId}
-                        label="Link to product"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <PlaceholderCell value={video.description} label="Add description" />
-                    </TableCell>
+                    <TableCell><PlaceholderCell value={video.relatedProductId} label="Link product" /></TableCell>
+                    <TableCell><PlaceholderCell value={video.description} label="Add description" /></TableCell>
                     <TableCell>
                       {isPlaceholder(video.description)
                         ? <span className="text-xs px-2 py-0.5 rounded-full bg-destructive/10 text-destructive">Incomplete</span>
@@ -258,17 +240,18 @@ const Inventory = () => {
         <div className="mt-8 p-4 border border-border bg-muted/10">
           <h3 className="text-sm font-medium text-foreground mb-3">Field Guide</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs text-muted-foreground">
-            <div><strong>Price:</strong> In ₪ (NIS) — e.g. ₪12,500</div>
+            <div><strong>Price:</strong> USD or NIS — e.g. $1,500 / ₪12,500</div>
             <div><strong>Material:</strong> 14K/18K White/Yellow/Rose Gold, Platinum</div>
             <div><strong>Carat:</strong> Total carat weight — e.g. 1.52 ct</div>
+            <div><strong># Diamonds:</strong> Total stone count — e.g. 45</div>
             <div><strong>Color:</strong> GIA scale D–Z</div>
             <div><strong>Clarity:</strong> FL, IF, VVS1, VVS2, VS1, VS2, SI1, SI2, I1–I3</div>
             <div><strong>Cut:</strong> Excellent, Very Good, Good, Fair</div>
-            <div><strong>Shape:</strong> Round, Princess, Oval, Cushion, Pear, Emerald, Marquise, Radiant, Asscher, Heart</div>
-            <div><strong>Fluorescence:</strong> None, Faint, Medium, Strong, Very Strong</div>
+            <div><strong>Shape:</strong> Round, Marquise, Pear, Oval, Radiant, Princess, Cushion, Emerald, Asscher, Heart</div>
+            <div><strong>Finish:</strong> High Polish, Satin, Brushed, Hammered</div>
             <div><strong>GIA Report #:</strong> 10-digit GIA certificate number</div>
             <div><strong>Weight:</strong> Metal weight in grams — e.g. 4.2g</div>
-            <div><strong>Dimensions:</strong> L × W × H in mm — e.g. 8.2 × 5.1 × 3.4 mm</div>
+            <div><strong>Barcode:</strong> Internal reference — e.g. ER_005, NK_003</div>
           </div>
         </div>
       </main>
