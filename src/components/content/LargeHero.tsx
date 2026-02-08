@@ -1,12 +1,12 @@
-import heroMain from "@/assets/hero-main.jpg";
+import stone01 from "@/assets/catalog/stone-01.jpg";
 
 const LargeHero = () => {
   return (
     <section className="w-full mb-16 px-6">
       <div className="w-full aspect-[16/9] mb-3 overflow-hidden">
         <img 
-          src={heroMain} 
-          alt="MOOREDIAMONDS - GIA certified loose diamonds collection" 
+          src={stone01} 
+          alt="MOOREDIAMONDS — GIA Certified Loose Diamonds" 
           className="w-full h-full object-cover"
         />
       </div>
