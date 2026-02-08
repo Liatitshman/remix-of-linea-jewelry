@@ -5,11 +5,12 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import diamondRing1 from "@/assets/diamond-ring-1.jpg";
-import diamondRing2 from "@/assets/diamond-ring-2.jpg";
-import diamondNecklace from "@/assets/diamond-necklace-1.jpg";
-import diamondEarrings from "@/assets/diamond-earrings-1.jpg";
-import diamondBracelet from "@/assets/diamond-bracelet-1.jpg";
+import product5 from "@/assets/product-5.jpg";
+import product6 from "@/assets/product-6.jpg";
+import product7 from "@/assets/product-7.jpg";
+import product8 from "@/assets/product-8.jpg";
+import product9 from "@/assets/product-9.jpg";
+import product10 from "@/assets/product-10.jpg";
 
 interface Product {
   id: number;
@@ -26,7 +27,7 @@ const products: Product[] = [
     name: "Royal Cluster",
     category: "Rings",
     price: "₪18,500",
-    image: diamondRing1,
+    image: product5,
     isNew: true,
   },
   {
@@ -34,14 +35,14 @@ const products: Product[] = [
     name: "Solitaire Classic",
     category: "Rings",
     price: "₪12,800",
-    image: diamondRing2,
+    image: product6,
   },
   {
     id: 3,
     name: "Brilliant Pendant",
     category: "Necklaces",
     price: "₪8,950",
-    image: diamondNecklace,
+    image: product7,
     isNew: true,
   },
   {
@@ -49,21 +50,21 @@ const products: Product[] = [
     name: "Diamond Studs",
     category: "Earrings",
     price: "₪6,200",
-    image: diamondEarrings,
+    image: product8,
   },
   {
     id: 5,
     name: "Tennis Bracelet",
     category: "Bracelets",
     price: "₪22,400",
-    image: diamondBracelet,
+    image: product9,
   },
   {
     id: 6,
     name: "Eternity Band",
     category: "Rings",
     price: "₪9,750",
-    image: diamondRing1,
+    image: product10,
   },
 ];
 

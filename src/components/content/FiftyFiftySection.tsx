@@ -1,5 +1,5 @@
-import diamondRing from "@/assets/diamond-ring-1.jpg";
-import diamondBracelet from "@/assets/diamond-bracelet-1.jpg";
+import product1 from "@/assets/product-1.jpg";
+import product4 from "@/assets/product-4.jpg";
 import { Link } from "react-router-dom";
 
 const FiftyFiftySection = () => {
@@ -10,8 +10,8 @@ const FiftyFiftySection = () => {
           <Link to="/category/rings" className="block">
             <div className="w-full aspect-square mb-3 overflow-hidden">
               <img 
-                src={diamondRing} 
-                alt="Diamond rings collection" 
+                src={product1} 
+                alt="Diamond rings collection - GIA certified" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -30,7 +30,7 @@ const FiftyFiftySection = () => {
           <Link to="/category/bracelets" className="block">
             <div className="w-full aspect-square mb-3 overflow-hidden">
               <img 
-                src={diamondBracelet} 
+                src={product4} 
                 alt="Diamond tennis bracelet" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
