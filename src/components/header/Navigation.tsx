@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ShoppingBag from "./ShoppingBag";
-import pantheonImage from "@/assets/pantheon.jpg";
-import eclipseImage from "@/assets/eclipse.jpg";
-import haloImage from "@/assets/halo.jpg";
+import diamondRing1 from "@/assets/diamond-ring-1.jpg";
+import diamondNecklace from "@/assets/diamond-necklace-1.jpg";
+import diamondEarrings from "@/assets/diamond-earrings-1.jpg";
 
 interface CartItem {
   id: number;
@@ -28,25 +28,25 @@ const Navigation = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: 1,
-      name: "Pantheon",
-      price: "€2,850",
-      image: pantheonImage,
+      name: "Royal Cluster",
+      price: "₪18,500",
+      image: diamondRing1,
       quantity: 1,
-      category: "Earrings"
+      category: "Rings"
     },
     {
       id: 2,
-      name: "Eclipse",
-      price: "€3,200", 
-      image: eclipseImage,
+      name: "Brilliant Pendant",
+      price: "₪8,950", 
+      image: diamondNecklace,
       quantity: 1,
-      category: "Bracelets"
+      category: "Necklaces"
     },
     {
       id: 3,
-      name: "Halo",
-      price: "€1,950",
-      image: haloImage, 
+      name: "Diamond Studs",
+      price: "₪6,200",
+      image: diamondEarrings, 
       quantity: 1,
       category: "Earrings"
     }
@@ -83,43 +83,42 @@ const Navigation = () => {
   }, []);
 
   const popularSearches = [
-    "Gold Rings",
-    "Silver Necklaces", 
-    "Pearl Earrings",
-    "Designer Bracelets",
-    "Wedding Rings",
-    "Vintage Collection"
+    "Solitaire Rings",
+    "Tennis Bracelets", 
+    "Diamond Studs",
+    "Loose Diamonds",
+    "Engagement Rings",
+    "Custom Orders"
   ];
   
   const navItems = [
     { 
-      name: "Shop", 
+      name: "Catalog", 
       href: "/category/shop",
       submenuItems: [
         "Rings",
         "Necklaces", 
         "Earrings",
         "Bracelets",
-        "Watches"
+        "Loose Diamonds"
       ],
       images: [
-        { src: "/rings-collection.png", alt: "Rings Collection", label: "Rings" },
-        { src: "/earrings-collection.png", alt: "Earrings Collection", label: "Earrings" }
+        { src: diamondRing1, alt: "Diamond Rings", label: "Rings" },
+        { src: diamondEarrings, alt: "Diamond Earrings", label: "Earrings" }
       ]
     },
     { 
-      name: "New in", 
+      name: "New In", 
       href: "/category/new-in",
       submenuItems: [
-        "This Week's Arrivals",
-        "Spring Collection",
-        "Featured Designers",
+        "Latest Arrivals",
+        "Featured Pieces",
         "Limited Edition",
-        "Pre-Orders"
+        "Custom Orders"
       ],
       images: [
-        { src: "/arcus-bracelet.png", alt: "Arcus Bracelet", label: "Arcus Bracelet" },
-        { src: "/span-bracelet.png", alt: "Span Bracelet", label: "Span Bracelet" }
+        { src: diamondNecklace, alt: "Diamond Pendant", label: "New Pendants" },
+        { src: diamondRing1, alt: "New Rings", label: "New Rings" }
       ]
     },
     { 
@@ -127,13 +126,13 @@ const Navigation = () => {
       href: "/about/our-story",
       submenuItems: [
         "Our Story",
-        "Sustainability",
-        "Size Guide",
+        "Services",
+        "GIA Certification",
         "Customer Care",
-        "Store Locator"
+        "Contact"
       ],
       images: [
-        { src: "/founders.png", alt: "Company Founders", label: "Read our story" }
+        { src: diamondRing1, alt: "Diamond Exchange", label: "Our craft" }
       ]
     }
   ];
@@ -142,7 +141,7 @@ const Navigation = () => {
     <nav 
       className="relative" 
       style={{
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: 'hsl(170, 30%, 8%, 0.95)',
         backdropFilter: 'blur(10px)'
       }}
     >
@@ -188,11 +187,7 @@ const Navigation = () => {
         {/* Center logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link to="/" className="block">
-            <img 
-              src="/LINEA-1.svg" 
-              alt="LINEA" 
-              className="h-6 w-auto"
-            />
+            <span className="text-lg font-light tracking-[0.3em] text-primary">DIAMONDS CATALOG</span>
           </Link>
         </div>
 
@@ -225,7 +220,7 @@ const Navigation = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
             </svg>
             {totalItems > 0 && (
-              <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[30%] text-[0.5rem] font-semibold text-black pointer-events-none">
+              <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[30%] text-[0.5rem] font-semibold text-primary pointer-events-none">
                 {totalItems}
               </span>
             )}
@@ -314,7 +309,7 @@ const Navigation = () => {
                   </svg>
                   <input
                     type="text"
-                    placeholder="Search for jewelry..."
+                    placeholder="Search diamonds & jewelry..."
                     className="flex-1 bg-transparent text-nav-foreground placeholder:text-nav-foreground/60 outline-none text-lg"
                     autoFocus
                   />
