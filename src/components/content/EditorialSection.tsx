@@ -1,4 +1,4 @@
-import diamondRing2 from "@/assets/diamond-ring-2.jpg";
+import heroSecondary from "@/assets/hero-secondary.jpg";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const EditorialSection = () => {
         
         <div className="order-first md:order-last">
           <div className="w-full aspect-square overflow-hidden">
-            <img src={diamondRing2} alt="Solitaire diamond engagement ring" className="w-full h-full object-cover" />
+            <img src={heroSecondary} alt="MOOREDIAMONDS workshop" className="w-full h-full object-cover" />
           </div>
         </div>
       </div>

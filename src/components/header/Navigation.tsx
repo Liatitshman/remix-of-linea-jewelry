@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ShoppingBag from "./ShoppingBag";
-import diamondRing1 from "@/assets/diamond-ring-1.jpg";
-import diamondNecklace from "@/assets/diamond-necklace-1.jpg";
-import diamondEarrings from "@/assets/diamond-earrings-1.jpg";
+import product1 from "@/assets/product-1.jpg";
+import product2 from "@/assets/product-2.jpg";
+import product3 from "@/assets/product-3.jpg";
 
 interface CartItem {
   id: number;
@@ -30,7 +30,7 @@ const Navigation = () => {
       id: 1,
       name: "Royal Cluster",
       price: "₪18,500",
-      image: diamondRing1,
+      image: product1,
       quantity: 1,
       category: "Rings"
     },
@@ -38,7 +38,7 @@ const Navigation = () => {
       id: 2,
       name: "Brilliant Pendant",
       price: "₪8,950", 
-      image: diamondNecklace,
+      image: product2,
       quantity: 1,
       category: "Necklaces"
     },
@@ -46,7 +46,7 @@ const Navigation = () => {
       id: 3,
       name: "Diamond Studs",
       price: "₪6,200",
-      image: diamondEarrings, 
+      image: product3, 
       quantity: 1,
       category: "Earrings"
     }
@@ -103,8 +103,8 @@ const Navigation = () => {
         "Loose Diamonds"
       ],
       images: [
-        { src: diamondRing1, alt: "Diamond Rings", label: "Rings" },
-        { src: diamondEarrings, alt: "Diamond Earrings", label: "Earrings" }
+        { src: product1, alt: "Diamond Rings", label: "Rings" },
+        { src: product3, alt: "Diamond Earrings", label: "Earrings" }
       ]
     },
     { 
@@ -117,8 +117,8 @@ const Navigation = () => {
         "Custom Orders"
       ],
       images: [
-        { src: diamondNecklace, alt: "Diamond Pendant", label: "New Pendants" },
-        { src: diamondRing1, alt: "New Rings", label: "New Rings" }
+        { src: product2, alt: "Diamond Pendant", label: "New Pendants" },
+        { src: product1, alt: "New Rings", label: "New Rings" }
       ]
     },
     { 
@@ -132,7 +132,7 @@ const Navigation = () => {
         "Contact"
       ],
       images: [
-        { src: diamondRing1, alt: "Diamond Exchange", label: "Our craft" }
+        { src: product1, alt: "Diamond Exchange", label: "Our craft" }
       ]
     }
   ];
@@ -187,7 +187,7 @@ const Navigation = () => {
         {/* Center logo */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link to="/" className="block">
-            <span className="text-lg font-light tracking-[0.3em] text-primary">DIAMONDS CATALOG</span>
+            <span className="text-lg font-light tracking-[0.3em] text-primary">MOOREDIAMONDS</span>
           </Link>
         </div>
 

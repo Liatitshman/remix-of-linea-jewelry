@@ -1,5 +1,5 @@
-import diamondNecklace from "@/assets/diamond-necklace-1.jpg";
-import diamondEarrings from "@/assets/diamond-earrings-1.jpg";
+import product3 from "@/assets/product-3.jpg";
+import product2 from "@/assets/product-2.jpg";
 import { Link } from "react-router-dom";
 
 const OneThirdTwoThirdsSection = () => {
@@ -10,7 +10,7 @@ const OneThirdTwoThirdsSection = () => {
           <Link to="/category/earrings" className="block">
             <div className="w-full h-[500px] lg:h-[800px] mb-3 overflow-hidden">
               <img 
-                src={diamondEarrings} 
+                src={product3} 
                 alt="Diamond stud earrings" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
@@ -30,7 +30,7 @@ const OneThirdTwoThirdsSection = () => {
           <Link to="/category/necklaces" className="block">
             <div className="w-full h-[500px] lg:h-[800px] mb-3 overflow-hidden">
               <img 
-                src={diamondNecklace} 
+                src={product2} 
                 alt="Diamond pendant necklace" 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />

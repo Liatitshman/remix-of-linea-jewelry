@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-8">
           {/* Brand - Left side */}
           <div>
-            <h2 className="text-xl font-light tracking-wider mb-4 text-primary">DIAMONDS CATALOG</h2>
+            <h2 className="text-xl font-light tracking-wider mb-4 text-primary">MOOREDIAMONDS</h2>
             <p className="text-sm font-light text-muted-foreground leading-relaxed max-w-md mb-6">
               GIA-certified diamonds & fine jewelry, direct from the Israel Diamond Exchange
             </p>
@@ -66,7 +66,7 @@ const Footer = () => {
       <div className="border-t border-border -mx-6 px-6 pt-2">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm font-light text-muted-foreground mb-1 md:mb-0">
-            © 2026 Diamonds Catalog. All rights reserved.
+            © 2026 MOOREDIAMONDS. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="/privacy-policy" className="text-sm font-light text-muted-foreground hover:text-foreground transition-colors">
