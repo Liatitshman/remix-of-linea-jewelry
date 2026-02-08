@@ -18,7 +18,11 @@ const CustomStar = ({ filled, className }: { filled: boolean; className?: string
   </svg>
 );
 
-const ProductDescription = () => {
+interface ProductDescriptionProps {
+  product?: { name?: string; description?: string; gia?: { reportNumber: string } };
+}
+
+const ProductDescription = ({ product }: ProductDescriptionProps) => {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [isCareOpen, setIsCareOpen] = useState(false);
@@ -43,9 +47,8 @@ const ProductDescription = () => {
         {isDescriptionOpen && (
           <div className="pb-6 space-y-4">
             <p className="text-sm font-light text-muted-foreground leading-relaxed">
-              The Pantheon earrings embody architectural elegance with their clean, geometric design. 
-              Inspired by classical Roman architecture, these statement pieces feature a sophisticated 
-              interplay of curves and angles that catch and reflect light beautifully.
+              {product?.description || `The ${product?.name || 'piece'} embodies architectural elegance with a clean, geometric design. 
+              Each item is meticulously crafted with GIA-certified diamonds and precious metals.`}
             </p>
             <p className="text-sm font-light text-muted-foreground leading-relaxed">
               Each earring is meticulously crafted from premium sterling silver with an 18k gold 

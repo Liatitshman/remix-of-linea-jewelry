@@ -2,134 +2,126 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
-  Breadcrumb, 
-  BreadcrumbItem, 
-  BreadcrumbLink, 
-  BreadcrumbList, 
-  BreadcrumbPage, 
-  BreadcrumbSeparator 
+  Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, 
+  BreadcrumbPage, BreadcrumbSeparator 
 } from "@/components/ui/breadcrumb";
 import { Minus, Plus } from "lucide-react";
+import { type Product } from "@/data/products";
 
-const ProductInfo = () => {
+interface ProductInfoProps {
+  product: Product;
+}
+
+const ProductInfo = ({ product }: ProductInfoProps) => {
   const [quantity, setQuantity] = useState(1);
-
-  const incrementQuantity = () => setQuantity(prev => prev + 1);
-  const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
+  const categoryLabel = product.category.charAt(0).toUpperCase() + product.category.slice(1).replace("-", " ");
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumb - Show only on desktop */}
+      {/* Breadcrumb - Desktop only */}
       <div className="hidden lg:block">
         <Breadcrumb>
           <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/">Home</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/">Home</Link></BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/category/earrings">Earrings</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to={`/category/${product.category}`}>{categoryLabel}</Link></BreadcrumbLink></BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Pantheon</BreadcrumbPage>
-            </BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbPage>{product.name}</BreadcrumbPage></BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
 
-      {/* Product title and price */}
+      {/* Title & Price */}
       <div className="space-y-2">
         <div className="flex justify-between items-start">
           <div>
-            <p className="text-sm font-light text-muted-foreground mb-1">Earrings</p>
-            <h1 className="text-2xl md:text-3xl font-light text-foreground">Pantheon</h1>
+            <p className="text-sm font-light text-muted-foreground mb-1">{categoryLabel}</p>
+            <h1 className="text-2xl md:text-3xl font-light text-foreground">{product.name}</h1>
           </div>
           <div className="text-right">
-            <p className="text-xl font-light text-foreground">₪2,850</p>
+            <p className="text-xl font-light text-foreground">{product.price}</p>
           </div>
         </div>
       </div>
 
-      {/* GIA & Product details */}
+      {/* Details */}
       <div className="space-y-4 py-4 border-b border-border">
-        <div className="space-y-2">
-          <h3 className="text-sm font-light text-foreground">Material</h3>
-          <p className="text-sm font-light text-muted-foreground">18K Gold — White / Yellow / Rose</p>
-        </div>
-        
-        <div className="space-y-2">
-          <h3 className="text-sm font-light text-foreground">Diamond Details</h3>
-          <div className="grid grid-cols-2 gap-2 text-sm font-light text-muted-foreground">
-            <span>Carat: 0.50 ct</span>
-            <span>Color: F</span>
-            <span>Clarity: VS1</span>
-            <span>Cut: Excellent</span>
+        {product.material && (
+          <div className="space-y-2">
+            <h3 className="text-sm font-light text-foreground">Material</h3>
+            <p className="text-sm font-light text-muted-foreground">{product.material}</p>
           </div>
-        </div>
-
-        <div className="space-y-2">
-          <h3 className="text-sm font-light text-foreground">Dimensions</h3>
-          <p className="text-sm font-light text-muted-foreground">2.5cm x 1.2cm</p>
-        </div>
+        )}
         
-        <div className="space-y-2">
-          <h3 className="text-sm font-light text-foreground">Weight</h3>
-          <p className="text-sm font-light text-muted-foreground">4.2g per earring</p>
-        </div>
+        {product.diamond && (
+          <div className="space-y-2">
+            <h3 className="text-sm font-light text-foreground">Diamond Details</h3>
+            <div className="grid grid-cols-2 gap-2 text-sm font-light text-muted-foreground">
+              <span>Carat: {product.diamond.carat}</span>
+              <span>Color: {product.diamond.color}</span>
+              <span>Clarity: {product.diamond.clarity}</span>
+              <span>Cut: {product.diamond.cut}</span>
+              {product.diamond.shape && <span>Shape: {product.diamond.shape}</span>}
+              {product.diamond.fluorescence && <span>Fluorescence: {product.diamond.fluorescence}</span>}
+            </div>
+          </div>
+        )}
 
-        <div className="space-y-2">
-          <h3 className="text-sm font-light text-foreground">GIA Certificate</h3>
-          <p className="text-sm font-light text-primary underline cursor-pointer">View GIA Report #2195837461</p>
-        </div>
+        {product.dimensions && (
+          <div className="space-y-2">
+            <h3 className="text-sm font-light text-foreground">Dimensions</h3>
+            <p className="text-sm font-light text-muted-foreground">{product.dimensions}</p>
+          </div>
+        )}
         
-        <div className="space-y-2">
-          <h3 className="text-sm font-light text-foreground">Editor's notes</h3>
-          <p className="text-sm font-light text-muted-foreground italic">"A modern interpretation of classical architecture, these earrings bridge timeless elegance with contemporary minimalism."</p>
-        </div>
+        {product.weight && (
+          <div className="space-y-2">
+            <h3 className="text-sm font-light text-foreground">Weight</h3>
+            <p className="text-sm font-light text-muted-foreground">{product.weight}</p>
+          </div>
+        )}
+
+        {product.gia && (
+          <div className="space-y-2">
+            <h3 className="text-sm font-light text-foreground">GIA Certificate</h3>
+            <p className="text-sm font-light text-primary underline cursor-pointer">
+              View GIA Report #{product.gia.reportNumber}
+            </p>
+          </div>
+        )}
+        
+        {product.editorsNote && (
+          <div className="space-y-2">
+            <h3 className="text-sm font-light text-foreground">Editor's notes</h3>
+            <p className="text-sm font-light text-muted-foreground italic">"{product.editorsNote}"</p>
+          </div>
+        )}
       </div>
 
-      {/* Quantity and Add to Cart */}
+      {/* Quantity & CTA */}
       <div className="space-y-4">
         <div className="flex items-center gap-4">
           <span className="text-sm font-light text-foreground">Quantity</span>
           <div className="flex items-center border border-border">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={decrementQuantity}
-              className="h-10 w-10 p-0 hover:bg-transparent hover:opacity-50 rounded-none border-none"
-            >
+            <Button variant="ghost" size="sm" onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+              className="h-10 w-10 p-0 hover:bg-transparent hover:opacity-50 rounded-none border-none">
               <Minus className="h-4 w-4" />
             </Button>
-            <span className="h-10 flex items-center px-4 text-sm font-light min-w-12 justify-center border-l border-r border-border">
-              {quantity}
-            </span>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={incrementQuantity}
-              className="h-10 w-10 p-0 hover:bg-transparent hover:opacity-50 rounded-none border-none"
-            >
+            <span className="h-10 flex items-center px-4 text-sm font-light min-w-12 justify-center border-l border-r border-border">{quantity}</span>
+            <Button variant="ghost" size="sm" onClick={() => setQuantity(prev => prev + 1)}
+              className="h-10 w-10 p-0 hover:bg-transparent hover:opacity-50 rounded-none border-none">
               <Plus className="h-4 w-4" />
             </Button>
           </div>
         </div>
 
-        <Button 
-          className="w-full h-12 bg-foreground text-background hover:bg-foreground/90 font-light rounded-none"
-        >
+        <Button className="w-full h-12 bg-foreground text-background hover:bg-foreground/90 font-light rounded-none">
           Add to Bag
         </Button>
 
         <a 
-          href="https://wa.me/972500000000?text=Hi%2C%20I%27m%20interested%20in%20the%20Pantheon%20earrings" 
-          target="_blank" 
-          rel="noopener noreferrer"
+          href={`https://wa.me/972500000000?text=${encodeURIComponent(`Hi, I'm interested in the ${product.name} (${categoryLabel})`)}`}
+          target="_blank" rel="noopener noreferrer"
           className="w-full h-12 border border-border flex items-center justify-center gap-2 text-sm font-light text-foreground hover:bg-muted/20 transition-colors"
         >
           <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">

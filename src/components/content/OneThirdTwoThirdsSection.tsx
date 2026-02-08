@@ -1,5 +1,5 @@
-import product3 from "@/assets/product-3.jpg";
-import product2 from "@/assets/product-2.jpg";
+import jewelry09 from "@/assets/catalog/jewelry-09.jpg";
+import jewelry17 from "@/assets/catalog/jewelry-17.jpg";
 import { Link } from "react-router-dom";
 
 const OneThirdTwoThirdsSection = () => {
@@ -9,17 +9,12 @@ const OneThirdTwoThirdsSection = () => {
         <div className="lg:col-span-1">
           <Link to="/category/earrings" className="block">
             <div className="w-full h-[500px] lg:h-[800px] mb-3 overflow-hidden">
-              <img 
-                src={product3} 
-                alt="Diamond stud earrings" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
+              <img src={jewelry09} alt="Diamond Earrings Collection" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
             </div>
           </Link>
           <div>
-            <h3 className="text-sm font-normal text-foreground mb-1">
-              Diamond Earrings
-            </h3>
+            <h3 className="text-sm font-normal text-foreground mb-1">Diamond Earrings</h3>
             <p className="text-sm font-light text-muted-foreground">
               Studs, drops & hoops set with brilliant cut diamonds
             </p>
@@ -29,17 +24,12 @@ const OneThirdTwoThirdsSection = () => {
         <div className="lg:col-span-2">
           <Link to="/category/necklaces" className="block">
             <div className="w-full h-[500px] lg:h-[800px] mb-3 overflow-hidden">
-              <img 
-                src={product2} 
-                alt="Diamond pendant necklace" 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
+              <img src={jewelry17} alt="Diamond Pendant Necklaces" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
             </div>
           </Link>
           <div>
-            <h3 className="text-sm font-normal text-foreground mb-1">
-              Pendants & Necklaces
-            </h3>
+            <h3 className="text-sm font-normal text-foreground mb-1">Pendants & Necklaces</h3>
             <p className="text-sm font-light text-muted-foreground">
               Solitaire pendants and diamond necklaces in precious metals
             </p>
